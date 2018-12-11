@@ -1,17 +1,7 @@
 const config = {
-    // for sequelize`
-    // sequelize: {
-    //     dialect: 'mysql',
-    //     database: 'ercdata',
-    //     username: 'root',
-    //     password: '123456',
-    //     host: 'localhost',
-    //     port: 33306
-    // },
-
     sequelize: {
         dialect: 'mysql',
-        database: 'ercdata',
+        database: 'shxpdata',
         username: 'root',
         password: '12345678',
         host: 'localhost',

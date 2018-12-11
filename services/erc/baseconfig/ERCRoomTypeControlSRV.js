@@ -4,7 +4,7 @@ const GLBConfig = require('../../../util/GLBConfig');
 const Sequence = require('../../../util/Sequence');
 const logger = require('../../../util/Logger').createLogger('ERCRoomTypeControlSRV');
 const model = require('../../../model');
-const kujialeSRV = require('../../openapi/KujialeSRV');
+// const kujialeSRV = require('../../openapi/KujialeSRV');
 
 const sequelize = model.sequelize;
 const tb_roomtype = model.erc_roomtype;

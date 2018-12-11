@@ -9,7 +9,7 @@ const Sequence = require('../../../util/Sequence');
 const logger = require('../../../util/Logger').createLogger('ERCEstateControlSRV');
 const model = require('../../../model');
 const FDomain = require('../../../bl/common/FunctionDomainBL');
-const kujialeSRV = require('../../openapi/KujialeSRV');
+// const kujialeSRV = require('../../openapi/KujialeSRV');
 
 const sequelize = model.sequelize;
 const tb_domain = model.common_domain;

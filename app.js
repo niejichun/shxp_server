@@ -59,8 +59,6 @@ app.get('/', (req, res) => {
 
 app.get('/files/:filetag', FileSRV.FileResource);
 
-app.post('/api/test', services.TestSRV.TestResource);
-app.get('/api/test', services.TestSRV.TestResource);
 app.post('/api/auth', AuthSRV.AuthResource);
 app.post('/api/phoneresetpassword', AuthSRV.PhoneResetPasswordResource);
 app.post('/api/signout', AuthSRV.SignOutResource);
@@ -229,13 +227,6 @@ app.post('/api/mobile/complaint', services.MBComplaintSRV.ERCComplaintControlRes
 
 //微信小程序
 app.post('/api/mobile/wechat', services.MBWechatSRV.WechatResource);
-
-//openApi
-app.post('/api/openapi/zowee', services.ZoweeSRV.ZoweeControlResource);
-app.post('/api/openapi/kujiale', services.KujialeSRV.KujialeControlResource);
-app.get('/api/openapi/kujiale', services.KujialeSRV.KujialeGetControlResource);
-app.post('/api/openapi/signpdf', services.SignPDFSRV.SignPDFControlResource);
-app.post('/api/openapi/shop', services.shopSRV.ShopControlResource);
 
 // longtermassets
 app.post('/api/erc/longtermassets/ERCFixedAssetsControl', services.ERCFixedAssetsControlSRV.ERCFixedAssetsControlResource);

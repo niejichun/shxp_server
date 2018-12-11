@@ -11,7 +11,7 @@ const Sequence = require('../../../util/Sequence');
 const logger = require('../../../util/Logger').createLogger('ERCEmployeeInformationControlSRV');
 const model = require('../../../model');
 const moment = require('moment');
-const KujialeSRV = require('../../openapi/KujialeSRV');
+// const KujialeSRV = require('../../openapi/KujialeSRV');
 
 const sequelize = model.sequelize;
 const tb_usergroup = model.common_usergroup;
@@ -1498,7 +1498,7 @@ async function addKuAct(req, res) {
         if (!users) {
             return common.sendError(res, 'user_07');
         }
-        let emailResult = await KujialeSRV.getEmail(users.username,doc.kujiale_appuid,doc.user_id);
+        // let emailResult = await KujialeSRV.getEmail(users.username,doc.kujiale_appuid,doc.user_id);
         if (emailResult.dataValues == null) {
             let emailExample = RegExp(/user has already been bind to email/);
             let emailExample2 = RegExp(/user not registered/)
