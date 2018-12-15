@@ -4539,4 +4539,44 @@ module.exports = {
             'text': '其它货币资金'
         }
     ],
+
+    SHXPPRODUCTCLASS:[
+        {
+            'id': '0',
+            'value': '0',
+            'text': '西式汤'
+        },
+        {
+            'id': '1',
+            'value': '1',
+            'text': '色拉'
+        },
+        {
+            'id': '2',
+            'value': '2',
+            'text': '主菜'
+        },
+        {
+            'id': '3',
+            'value': '3',
+            'text': '酒水'
+        },
+        {
+            'id': '4',
+            'value': '4',
+            'text': '甜点'
+        }
+    ],
+    SHXPPRODUCTRECOMMEND:[
+        {
+            'id': '0',
+            'value': '0',
+            'text': '否'
+        },
+        {
+            'id': '1',
+            'value': '1',
+            'text': '是'
+        }
+    ]
 };

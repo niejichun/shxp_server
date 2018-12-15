@@ -255,6 +255,11 @@ app.post('/api/erc/cashiermanage/ERCMaterielSRControl', services.ERCMaterielSRCo
 app.post('/api/erc/cashiermanage/ERCSpecialExpenseGatheringSumControl', services.ERCSpecialExpenseGatheringSumControlSRV.ERCSpecialExpenseGatheringSumResource);
 app.post('/api/erc/cashiermanage/ERCRecordingVoucherSCControl', services.ERCRecordingVoucherSCControlSRV.ERCRecordingVoucherSCControlResource);
 
+
+// 上海协凭小程序
+app.post('/api/shxp/baseconfig/SHXPProductControl', services.SHXPProductControlSRV.ERCSHXPProductControllResource);
+
+
 //site
 app.use(function (req, res, next) {
     var err = new Error('Not Found');

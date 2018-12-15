@@ -808,7 +808,23 @@ let genRecordingVoucherCID = async (user) => {
         return error;
     }
 };
+
+let genSHXPProductID = async (user) => {
+    try {
+        let queryRst = await sequelize.query('select nextval(\'shxpProductId\') num', {
+            type: sequelize.QueryTypes.SELECT
+        });
+        let currentIndex = ('0000' + queryRst[0].num).slice(-4);
+
+        let today = (new Date()).Format("yyyyMMdd");
+        return 'P' + currentIndex;
+    } catch (error) {
+        logger.error(error);
+        return error;
+    }
+};
 module.exports = {
+    genSHXPProductID:genSHXPProductID,
     genUserID: genUserID,
     genOrderID: genOrderID,
     genSalesOrderID: genSalesOrderID,

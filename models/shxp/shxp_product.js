@@ -21,17 +21,17 @@ module.exports = db.defineModel('tbl_shxp_product', {
         defaultValue: 0,
         allowNull: true
     },
-    procust_class: {//类别
+    product_class: {//类别
         type: db.STRING(20),
         allowNull: true
     },
-    procust_class: {//类别
-        type: db.STRING(20),
-        allowNull: true
-    },
-    procust_recommend: {//是否推荐菜
+    product_recommend: {//是否推荐菜
         type: db.STRING(5),
         allowNull: true
-    }
+    },
+    product_img_url: {//菜品照片存放路径
+        type: db.STRING(300),
+        allowNull: true
+    },
 
 });
