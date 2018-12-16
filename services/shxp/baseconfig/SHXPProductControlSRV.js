@@ -20,6 +20,10 @@ exports.ERCSHXPProductControllResource = (req, res) => {
         modifyProduct(req,res)
     } else if (method==='searchProduct'){
         searchProduct(req,res)
+    } else if (method==='upload'){
+        uploadAct(req,res)
+    } else if (method==='removeFile'){
+        removeFile(req,res)
     } else {
         common.sendError(res, 'common_01');
     }
@@ -37,11 +41,19 @@ async function initAct(req, res) {
     }
 }
 
-
 async function addProduct(req,res){
     try {
-        let doc = common.docTrim(req.body), user = req.user
+        let doc = common.docTrim(req.body), user = req.user,fileUrl
 
+        if(doc.file_url){
+            //图片mongo
+            fileUrl = await common.fileMove(doc.product_img_url, 'upload');
+        }else{
+            fileUrl = ''
+        }
+
+
+        //mysql
         let ProductCode = await Sequence.genSHXPProductID()
         let product =  await tb_product.create({
             product_code:ProductCode,
@@ -49,8 +61,10 @@ async function addProduct(req,res){
             product_price:doc.product_price,
             product_class:doc.product_class,
             product_recommend:doc.product_recommend,
-            product_img_url:doc.product_img_url
+            product_img_url:fileUrl
         });
+
+
         common.sendData(res, product);
     } catch (error) {
         common.sendFault(res, error);
@@ -66,12 +80,15 @@ async function deleteProduct(req,res){
                 product_id: doc.product_id
             }
         });
+        if(doc.product_img_url){
+            await common.fileRemove(doc.product_img_url);
+        }
+
         common.sendData(res, result);
     } catch (error) {
         common.sendFault(res, error);
     }
 }
-
 
 async function modifyProduct(req,res){
     try {
@@ -87,7 +104,7 @@ async function modifyProduct(req,res){
             product.product_price = doc.new.product_price,
             product.product_class = doc.new.product_code,
             product.product_recommend = doc.new.product_recommend,
-            product.product_img_url = doc.new.product_img_url
+            // product.product_img_url = doc.new.product_img_url
             await product.save();
             common.sendData(res, product)
         } else {
@@ -109,6 +126,12 @@ async function searchProduct(req,res){
         for(let r of result.data){
             let result = JSON.parse(JSON.stringify(r));
             result.created_at = r.created_at.Format("yyyy-MM-dd");
+            result.files = [
+                {
+                    file_url: r.product_img_url
+                }
+             ]
+
             returnData.rows.push(result)
         }
 
@@ -116,4 +139,21 @@ async function searchProduct(req,res){
     } catch (error) {
         common.sendFault(res, error);
     }
+}
+
+async function uploadAct (req, res){
+    try {
+        let fileInfo = await common.fileSave(req);
+        common.sendData(res, fileInfo)
+    } catch (error) {
+        common.sendFault(res, error)
+        return
+    }
+}
+
+async function removeFile(req,res){
+    let doc = common.docTrim(req.body), user = req.user
+
+    await common.fileRemove(doc.product_img_url);
+    common.sendData(res, {})
 }

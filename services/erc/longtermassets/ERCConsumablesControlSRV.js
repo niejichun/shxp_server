@@ -104,8 +104,8 @@ async function initData(req, res) {
         common.sendData(res, returnData)
         return
     } catch (error) {
-        logger.error('ERCConsumablesControlResource-initData:' + err);
-        common.sendFault(res, err);
+        logger.error('ERCConsumablesControlResource-initData:' + error);
+        common.sendFault(res, error);
     }
 }
 // 查询低值易耗品列表
