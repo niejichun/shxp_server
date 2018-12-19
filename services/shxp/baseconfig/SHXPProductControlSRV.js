@@ -45,7 +45,7 @@ async function addProduct(req,res){
     try {
         let doc = common.docTrim(req.body), user = req.user,fileUrl
 
-        if(doc.file_url){
+        if(doc.product_img_url){
             //图片mongo
             fileUrl = await common.fileMove(doc.product_img_url, 'upload');
         }else{
