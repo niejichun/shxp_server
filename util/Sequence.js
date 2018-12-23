@@ -823,6 +823,7 @@ let genSHXPProductID = async (user) => {
         return error;
     }
 };
+
 module.exports = {
     genSHXPProductID:genSHXPProductID,
     genUserID: genUserID,

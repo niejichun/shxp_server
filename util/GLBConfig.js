@@ -4578,5 +4578,17 @@ module.exports = {
             'value': '1',
             'text': '是'
         }
+    ],
+    SHXPSEATLOCATION:[
+        {
+            'id': '1',
+            'value': '1',
+            'text': '大厅'
+        },
+        {
+            'id': '2',
+            'value': '2',
+            'text': '包房'
+        }
     ]
 };
