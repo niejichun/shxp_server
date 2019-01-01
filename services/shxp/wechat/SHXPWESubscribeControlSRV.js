@@ -46,21 +46,24 @@ async function addReserve(req,res){
     try{
         let doc = common.docTrim(req.body),user = req.user, returnData = [],replacements=[]
 
+        let genSHXPReserveID = await Sequence.genSHXPReserveID(user)
         let reserve = await tb_reserve.create({
+            reserve_code:genSHXPReserveID,
             reserve_name:doc.reserve_name,
             reserve_phone:doc.reserve_phone,
             reserve_remark:doc.reserve_remark,
             reserve_date:doc.reserve_date,
-            reserve_seat_class:doc.reserve_seat_class
+            seatClass_id:doc.seatClass_id,
+            reserve_time_interval:doc.reserve_time_interval,
+            reserve_state:1
         })
-
 
 
         let queryStr = `update tbl_shxp_seatClass set seatClass_have =seatClass_have+1,seatClass_no = seatClass_no-1 
             where seatClass_id = ?`;
         replacements.push(doc.seatClass_id)
         let result = await sequelize.query(queryStr, {replacements: replacements, type: sequelize.QueryTypes.UPDATE});
-        common.sendData(res, {});
+        common.sendData(res, {state:'success'});
 
     }catch (error) {
         common.sendFault(res, error);

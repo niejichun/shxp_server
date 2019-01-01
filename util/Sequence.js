@@ -823,7 +823,20 @@ let genSHXPProductID = async (user) => {
         return error;
     }
 };
+let genSHXPReserveID = async (user) => {
+    try {
+        let queryRst = await sequelize.query('select nextval(\'shxpReserveId\') num', {
+            type: sequelize.QueryTypes.SELECT
+        });
+        let currentIndex = ('0000' + queryRst[0].num).slice(-4);
 
+        let today = (new Date()).Format("yyyyMMdd");
+        return  today + currentIndex;
+    } catch (error) {
+        logger.error(error);
+        return error;
+    }
+};
 module.exports = {
     genSHXPProductID:genSHXPProductID,
     genUserID: genUserID,
@@ -879,5 +892,6 @@ module.exports = {
     genSpecialExpenseSumID:genSpecialExpenseSumID,
     genCashiergatheringSumID:genCashiergatheringSumID,
     genRecordingVoucherSID:genRecordingVoucherSID,
-    genRecordingVoucherCID:genRecordingVoucherCID
+    genRecordingVoucherCID:genRecordingVoucherCID,
+    genSHXPReserveID:genSHXPReserveID
 };

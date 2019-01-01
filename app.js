@@ -262,6 +262,7 @@ app.post('/api/shxp/baseconfig/SHXPSeatClassControl', services.SHXPSeatClassCont
 app.post('/api/shxp/wechat/SHXPWEHomeControl', services.SHXPWEHomeControlSRV.SHXPWEHomeControlResource);
 app.post('/api/shxp/wechat/SHXPWEMenuControl', services.SHXPWEMenuControlSRV.SHXPWEMenuControlResource);
 app.post('/api/shxp/wechat/SHXPWESubscribeControl', services.SHXPWESubscribeControlSRV.SHXPWESubscribeControlResource);
+app.post('/api/shxp/wechat/SHXPWEOrderControl', services.SHXPWEOrderControlSRV.SHXPWEOrderControlResource);
 
 
 
