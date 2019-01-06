@@ -32,9 +32,10 @@ const rp = require('request-promise');
 const sequelize = model.sequelize;
 
 //微信小程序
-const appid = 'wx7fabb95db3af3f32'
-const secret = '23556585c75455b68624253090f4993b'
-
+// const appid = 'wx7fabb95db3af3f32'
+// const secret = '23556585c75455b68624253090f4993b'
+const appid = 'wxb141309c0101eb3d'
+const secret = '78ce417ce31de1c2f33ae60c9c174a5a'
 //极光推送
 const appKey = 'dbbd84ea648f5e367fdfdc24'
 const masterSecret = '7aa30eff307e56f32e45091b'
