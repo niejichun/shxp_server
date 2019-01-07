@@ -16,23 +16,23 @@ exports.SHXPWEMeControlResource = (req, res) => {
     let method = req.query.method;
     if (method === 'get_openid') {
         getOpenIdAct(req, res);
+    }else if (method==='addUser'){
+        addUser(req,res)
     }
 };
 
-let getOpenIdAct = async(req, res)=> {
-    try {
-        let doc = common.docTrim(req.body)
+async function addUser(req,res) {
+    try{
+        let {code,encryptedData,iv,userInfo} = common.docTrim(req.body),returnData = {}
+        // 获取openid
+        let openIdRes = await getOpenId(code)
+        returnData.openId = openIdRes.openid
 
-        let returnData = await getOpenId(doc.code)
 
-        if (returnData.session_key){
-            returnData.session_key = ''
-        }
-        common.sendData(res, returnData);
-    } catch (error) {
+    }catch (error){
         common.sendFault(res, error);
     }
-};
+}
 
 function getOpenId(code) {
     let wxHost = 'api.weixin.qq.com';
@@ -60,17 +60,15 @@ function getOpenId(code) {
     });
 }
 
-async function getPhoneAct(req, res) {
+async function getPhoneAct(e) {
     try {
-        const doc = common.docTrim(req.body);
-        const data = await getOpenId(doc.code)
-        console.log(`***${data.session_key}***`)
-        console.log(`***${doc.encryptedData}***`)
-        console.log(`***${doc.iv}***`)
+        console.log(`***${e.session_key}***`)
+        console.log(`***${e.encryptedData}***`)
+        console.log(`***${e.iv}***`)
 
-        let sessionKey = new Buffer(data.session_key, 'base64')
-        let encryptedData = new Buffer(doc.encryptedData, 'base64')
-        let iv = new Buffer(doc.iv, 'base64')
+        let sessionKey = new Buffer(e.session_key, 'base64')
+        let encryptedData = new Buffer(e.encryptedData, 'base64')
+        let iv = new Buffer(e.iv, 'base64')
 
         let  decipher = crypto.createDecipheriv('aes-128-cbc', sessionKey, iv)
         // 设置自动 padding 为 true，删除填充补位
@@ -78,8 +76,8 @@ async function getPhoneAct(req, res) {
         let  decoded = decipher.update(encryptedData, 'binary', 'utf8')
         decoded += decipher.final('utf8')
         decoded = JSON.parse(decoded)
-        common.sendData(res, decoded.phoneNumber);
+        return decoded
     } catch (error) {
-        common.sendFault(res, error);
+        throw error
     }
 }
