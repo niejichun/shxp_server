@@ -83,7 +83,12 @@ const config = {
     // SECRET_KEY
     SECRET_KEY: 'zc7#_66#g%u2n$j_)j$-r(swt63d(2l%wc2y=wqt_m8kpy%04*',
     TOKEN_AGE: 43200000, // 12 * 60 * 60 * 10000
-    MOBILE_TOKEN_AGE: 31536000000 // 365 * 24 * 60 * 60 * 1000
+    MOBILE_TOKEN_AGE: 31536000000, // 365 * 24 * 60 * 60 * 1000
+
+
+    //微信小程序
+    appid : 'wxb141309c0101eb3d',
+    secret : '78ce417ce31de1c2f33ae60c9c174a5a'
 };
 
 module.exports = config;

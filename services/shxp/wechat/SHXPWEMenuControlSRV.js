@@ -1,7 +1,7 @@
 const common = require('../../../util/CommonUtil');
 const GLBConfig = require('../../../util/GLBConfig');
 const Sequence = require('../../../util/Sequence');
-const logger = require('../../../util/Logger').createLogger('ERCSupplierControlSRV');
+const logger = require('../../../util/Logger').createLogger('SHXPWEMenuControlResource');
 const model = require('../../../model');
 
 // tables

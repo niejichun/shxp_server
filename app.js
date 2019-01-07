@@ -46,7 +46,7 @@ app.use(bodyParser.text({
 }));
 app.use(bodyParser.raw());
 app.use(cookieParser());
-// app.use('/api', authority.AuthMiddleware);
+app.use('/api', authority.AuthMiddleware);
 
 //处理webpack服务请求
 app.get('/__webpack_hmr', function (req, res) {
@@ -258,8 +258,13 @@ app.post('/api/erc/cashiermanage/ERCRecordingVoucherSCControl', services.ERCReco
 
 // 上海协凭小程序
 app.post('/api/shxp/baseconfig/SHXPProductControl', services.SHXPProductControlSRV.ERCSHXPProductControllResource);
+app.post('/api/shxp/baseconfig/SHXPSeatClassControl', services.SHXPSeatClassControlSRV.SHXPSeatClassControlResource);
 app.post('/api/shxp/wechat/SHXPWEHomeControl', services.SHXPWEHomeControlSRV.SHXPWEHomeControlResource);
 app.post('/api/shxp/wechat/SHXPWEMenuControl', services.SHXPWEMenuControlSRV.SHXPWEMenuControlResource);
+app.post('/api/shxp/wechat/SHXPWESubscribeControl', services.SHXPWESubscribeControlSRV.SHXPWESubscribeControlResource);
+app.post('/api/shxp/wechat/SHXPWEOrderControl', services.SHXPWEOrderControlSRV.SHXPWEOrderControlResource);
+app.post('/api/shxp/wechat/SHXPWEMeControlSRV', services.SHXPWEMeControlSRV.SHXPWEMeControlResource);
+
 
 
 //site

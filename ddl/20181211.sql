@@ -6,6 +6,7 @@ insert into tbl_common_systemmenu (systemmenu_name,node_type,parent_id,version,c
 call Pro_AddMenu('小程序基础信息维护', '菜单管理','/shxp/baseconfig/SHXPProductControlSRV','SHXPPRODUCTCONTROLSRV');
 
 insert into seqmysql values ('shxpProductId',1,1,99999999);
+insert into seqmysql values ('shxpReserveId',1,1,99999999);
 
 DROP TABLE IF EXISTS `tbl_shxp_product`;
 CREATE TABLE `tbl_shxp_product` (
