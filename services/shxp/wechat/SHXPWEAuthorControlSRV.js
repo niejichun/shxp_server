@@ -1,43 +1,25 @@
 const common = require('../../../util/CommonUtil');
 const GLBConfig = require('../../../util/GLBConfig');
 const Sequence = require('../../../util/Sequence');
-const logger = require('../../../util/Logger').createLogger('ERCSupplierControlSRV');
+const logger = require('../../../util/Logger').createLogger('SHXPWEAuthorControlResource');
 const model = require('../../../model');
-
+const config = require('../../../config');
+const crypto = require('crypto');
+const https = require('https');
 // tables
 const sequelize = model.sequelize
-const tb_product = model.shxp_product;
 
-exports.SHXPWEHomeControlResource = (req, res) => {
+const appid = 'wxb141309c0101eb3d'
+const secret = '78ce417ce31de1c2f33ae60c9c174a5a'
+
+exports.SHXPWEAuthorControlResource = (req, res) => {
     let method = req.query.method;
-    if (method === 'searchSignboardProduct') {
-        searchSignboardProduct(req, res);
-    }else if (method==='get_openid'){
+    if (method === 'get_openid') {
         getOpenIdAct(req, res);
-    }else if (method==='add_user'){
+    }else if (method==='addUser'){
         addUser(req,res)
     }
 };
-
-async function searchSignboardProduct(req,res){
-    try {
-        let doc = common.docTrim(req.body),user = req.user, returnData = []
-        let queryStr = `select * from tbl_shxp_product where state = 1 and product_recommend = 1`
-        let result = await sequelize.query(queryStr, {replacements: [], type: sequelize.QueryTypes.SELECT});
-
-        for(let r of result){
-            returnData.push({
-                url:r.product_img_url,
-                name:r.product_name,
-                price:r.product_price
-            })
-        }
-
-        common.sendData(res, returnData);
-    } catch (error) {
-        common.sendFault(res, error);
-    }
-}
 
 async function addUser(req,res) {
     try{
