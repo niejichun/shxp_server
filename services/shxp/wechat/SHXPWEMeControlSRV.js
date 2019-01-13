@@ -23,17 +23,29 @@ exports.SHXPWEMeControlResource = (req, res) => {
 
 async function addUser(req,res) {
     try{
-        let {code,encryptedData,iv,userInfo} = common.docTrim(req.body),returnData = {}
+        let {code} = common.docTrim(req.body),returnData = {}
         // 获取openid
         let openIdRes = await getOpenId(code)
         returnData.openId = openIdRes.openid
 
-
+        
     }catch (error){
         common.sendFault(res, error);
     }
 }
+let getOpenIdAct = async(req, res)=> {
+    try {
+        let doc = common.docTrim(req.body)
 
+        let returnData = await getOpenId(doc.code)
+        if (returnData.session_key){
+            returnData.session_key = ''
+        }
+        common.sendData(res, returnData);
+    } catch (error) {
+        common.sendFault(res, error);
+    }
+};
 function getOpenId(code) {
     let wxHost = 'api.weixin.qq.com';
     return new Promise(function (resolve, reject) {

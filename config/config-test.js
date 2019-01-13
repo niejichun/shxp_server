@@ -3,9 +3,9 @@ const config = {
         dialect: 'mysql',
         database: 'shxpdata',
         username: 'root',
-        password: '123456',
+        password: '12345678',
         host: 'localhost',
-        port: 33306
+        port: 3306
     },
 
     // for zowee`
@@ -24,7 +24,7 @@ const config = {
     redisCache: true,
     redis: {
         host: 'localhost',
-        port: 16379,
+        port: 6379,
         opts: {}
     },
     // for mongo
